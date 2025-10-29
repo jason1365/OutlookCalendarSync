@@ -8,7 +8,12 @@ This was forked from my Outlook Google Calendar Sync utility for which the origi
 
 ## Install
 
-Download the [latest release](https://github.com/David-Engel/OutlookCalendarSync/releases/latest) and run the installer. It will create a Start Menu shortcut and one in your personal Startup folder so it will start on login. It requires Outlook to be installed locally (only tested against Outlook 2016).
+Download the [latest release](../../releases/latest) and install the package that matches your Outlook bitness:
+
+- `OutlookCalendarSync-x86.msi` for 32-bit Outlook.
+- `OutlookCalendarSync-x64.msi` for 64-bit Outlook.
+
+You can confirm Outlook's bitness from `File > Office Account > About Outlook`. The installer will create a Start Menu shortcut and one in your personal Startup folder so it will start on login. Outlook must be installed locally (validated with Outlook 2016).
 
 ## Configure Settings
 
@@ -34,3 +39,16 @@ Switch to the Sync tab and push the Sync button
 For each calendar checked, all appointment items will be read within the sync date range specified and for every other calendar checked, a copy of the appointment item will be created with most details preserved. The organizer will be you on copies. Reminders will only be copied if you ckecked the Add Reminders option, otherwise they will be set to None (I don't need double reminders). The Subject will be prefixed with (c) to make it easy to identify the original appointment from copies when looking at your calendars in Outlook.
 
 If you want to clean everything up, the Delete All Sync Items button will delete any Appointment Items created by the application in all selected calendars (Settings) within the specified Sync Date Range (Settings).
+
+## Build Outputs
+
+Running `Release|x86` or `Release|x64` drops the application binaries under `artifacts/app/<platform>/Release`. The Visual Studio Installer Projects extension produces MSIs when you build each setup project (`OutlookCalendarSyncSetupX86` and `OutlookCalendarSyncSetupX64`) in Release mode; the results are written to `artifacts/installer/<platform>/Release/OutlookCalendarSync-<platform>.msi`.
+
+## Release Packaging
+
+When publishing a new version, build both installers and attach them to the GitHub release with descriptive links, for example:
+
+- `[OutlookCalendarSync-x86.msi](../../releases/download/vX.Y.Z/OutlookCalendarSync-x86.msi)`
+- `[OutlookCalendarSync-x64.msi](../../releases/download/vX.Y.Z/OutlookCalendarSync-x64.msi)`
+
+Replace `vX.Y.Z` with the tag version number. Listing both links in the release notes ensures users can quickly choose the installer that matches their Outlook bitness.
