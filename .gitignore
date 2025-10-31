@@ -5,3 +5,5 @@ obj
 /src/OutlookCalendarSync/*.user
 /src/OutlookCalendarSyncSetup/Debug
 /src/OutlookCalendarSyncSetup/Release
+src/UpgradeLog.htm
+artifacts/

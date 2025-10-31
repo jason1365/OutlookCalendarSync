@@ -124,8 +124,9 @@ namespace OutlookCalendarSync
 
         private void SyncWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (e.Argument is string arg &&
-                "DELETE".Equals(arg))
+            string arg = e.Argument as string;
+            if (arg != null &&
+                string.Equals(arg, "DELETE", StringComparison.Ordinal))
             {
                 DeleteAllSyncItems();
                 return;
@@ -373,7 +374,8 @@ namespace OutlookCalendarSync
             string[] chunks = textBoxMinuteOffsets.Text.Split(delimiters);
             foreach (string c in chunks)
             {
-                int.TryParse(c, out int min);
+                int min;
+                int.TryParse(c, out min);
                 _minuteOffsets.Add(min);
             }
         }
